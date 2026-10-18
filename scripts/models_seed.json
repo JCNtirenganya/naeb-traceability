@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "note": "Seed recordable models for NAEB Coffee Traceability. Used by scripts/create_tables.py and as the default model registry. Fields are proposals — admins can change anything in the app's Model builder.",
+  "models": [
+    {
+      "id": "exporter", "name": "Exporter", "plural": "Exporters", "kind": "recordable", "storage": "table",
+      "titleField": "name", "attachments": true, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "exporter_id", "label": "Exporter ID", "type": "string", "required": true, "unique": true },
+        { "name": "name", "label": "Name", "type": "string", "required": true },
+        { "name": "licence_no", "label": "Licence number", "type": "string" },
+        { "name": "contact_person", "label": "Contact person", "type": "string" },
+        { "name": "phone", "label": "Phone", "type": "string" },
+        { "name": "email", "label": "Email", "type": "string" },
+        { "name": "district", "label": "District", "type": "string" },
+        { "name": "country", "label": "Country", "type": "string" },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "importer", "name": "Importer", "plural": "Importers", "kind": "recordable", "storage": "table",
+      "titleField": "name", "attachments": true, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "importer_id", "label": "Importer ID", "type": "string", "required": true, "unique": true },
+        { "name": "name", "label": "Name", "type": "string", "required": true },
+        { "name": "country", "label": "Country", "type": "string", "required": true },
+        { "name": "eori", "label": "EORI number", "type": "string" },
+        { "name": "contact_person", "label": "Contact person", "type": "string" },
+        { "name": "phone", "label": "Phone", "type": "string" },
+        { "name": "email", "label": "Email", "type": "string" },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "delivery", "name": "Cherry delivery", "plural": "Cherry deliveries", "kind": "recordable", "storage": "table",
+      "titleField": "delivery_id", "attachments": true, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "delivery_id", "label": "Delivery ID", "type": "string", "required": true, "unique": true },
+        { "name": "cws_id", "label": "Washing station (CWS)", "type": "lookup", "model": "cws", "required": true },
+        { "name": "farmer_id", "label": "Farmer", "type": "lookup", "model": "farmer", "required": true },
+        { "name": "plot_id", "label": "Plot (optional)", "type": "lookup", "model": "farm" },
+        { "name": "delivery_date", "label": "Delivery date", "type": "date", "required": true },
+        { "name": "weight_kg", "label": "Cherry weight (kg)", "type": "decimal", "required": true, "min": 0 },
+        { "name": "grade", "label": "Grade", "type": "choice" },
+        { "name": "price_per_kg", "label": "Price per kg (RWF)", "type": "decimal" },
+        { "name": "receipt_no", "label": "Receipt number", "type": "string" },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "lot", "name": "Lot (parchment)", "plural": "Lots", "kind": "recordable", "storage": "table",
+      "titleField": "lot_id", "attachments": true, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "lot_id", "label": "Lot ID", "type": "string", "required": true, "unique": true },
+        { "name": "cws_id", "label": "Washing station", "type": "lookup", "model": "cws", "required": true },
+        { "name": "created_date", "label": "Created date", "type": "date", "required": true },
+        { "name": "cherry_kg_in", "label": "Cherry in (kg)", "type": "decimal" },
+        { "name": "parchment_kg_out", "label": "Parchment out (kg)", "type": "decimal" },
+        { "name": "process", "label": "Process", "type": "choice" },
+        { "name": "status", "label": "Status", "type": "choice" },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "lot_delivery", "name": "Lot–delivery link", "plural": "Lot–delivery links", "kind": "recordable", "storage": "table",
+      "titleField": "link_id", "attachments": false, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "link_id", "label": "Link ID", "type": "string", "required": true, "unique": true },
+        { "name": "lot_id", "label": "Lot", "type": "lookup", "model": "lot", "required": true },
+        { "name": "delivery_id", "label": "Delivery", "type": "lookup", "model": "delivery", "required": true },
+        { "name": "kg_allocated", "label": "Cherry kg allocated", "type": "decimal", "min": 0 },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "batch", "name": "Export batch", "plural": "Export batches", "kind": "recordable", "storage": "table",
+      "titleField": "batch_id", "attachments": true, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "batch_id", "label": "Batch ID", "type": "string", "required": true, "unique": true },
+        { "name": "exporter_id", "label": "Exporter", "type": "lookup", "model": "exporter", "required": true },
+        { "name": "importer_id", "label": "Importer", "type": "lookup", "model": "importer" },
+        { "name": "container", "label": "Container ref", "type": "string" },
+        { "name": "ship_date", "label": "Ship date", "type": "date" },
+        { "name": "dds_ref", "label": "DDS reference", "type": "string" },
+        { "name": "status", "label": "Status", "type": "choice" },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    },
+    {
+      "id": "batch_lot", "name": "Batch–lot link", "plural": "Batch–lot links", "kind": "recordable", "storage": "table",
+      "titleField": "link_id", "attachments": false, "editorTracking": true, "softDelete": "is_active",
+      "fields": [
+        { "name": "link_id", "label": "Link ID", "type": "string", "required": true, "unique": true },
+        { "name": "batch_id", "label": "Batch", "type": "lookup", "model": "batch", "required": true },
+        { "name": "lot_id", "label": "Lot", "type": "lookup", "model": "lot", "required": true },
+        { "name": "kg", "label": "Parchment kg", "type": "decimal", "min": 0 },
+        { "name": "data_source", "label": "Data source", "type": "choice" },
+        { "name": "is_active", "label": "Active", "type": "boolean" },
+        { "name": "notes", "label": "Notes", "type": "text" }
+      ]
+    }
+  ]
+}

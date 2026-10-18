@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rwanda Coffee · EUDR Traceability — NAEB</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="src/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">☕</span>
+    <div><h1>Rwanda Coffee · EUDR Traceability</h1><p id="srcline" class="muted">Starting…</p></div>
+  </div>
+  <div class="searchwrap">
+    <input id="gsearch" placeholder="Search everything…  (Ctrl+K)" aria-label="Global search" autocomplete="off">
+  </div>
+  <div class="topacts">
+    <button id="langbtn" class="ghost sm" title="Language">EN</button>
+    <button id="themebtn" class="ghost sm" title="Theme">◐</button>
+    <button id="indictoggle" class="ghost sm on" title="Show indicative (demo) data">Indicative</button>
+    <button id="signinbtn" class="sm">Sign in</button>
+    <button id="signoutbtn" class="ghost sm" hidden>Sign out</button>
+  </div>
+</header>
+
+<nav class="nav" id="nav"></nav>
+
+<main id="main"><div class="skeletonpage"><div class="sk skw60"></div><div class="sk"></div><div class="sk skw40"></div></div></main>
+
+<footer class="foot">
+  Stations &amp; farm polygons are read <b>live</b> from NAEB GIS. Records entered here are <b>recorded</b>.
+  Anything generated for demonstration is tagged <b>indicative</b> everywhere it appears.
+  Risk flags are a <b>pre-screening aid, not a legal EUDR determination</b>. Never commit farmer PII to the repository.
+</footer>
+
+<dialog id="dlg"><form id="dlgform" method="dialog"></form></dialog>
+<dialog id="signindlg">
+  <form id="signinform">
+    <h3>Sign in to NAEB GIS</h3>
+    <p class="muted">Your NAEB portal account. Credentials go straight to gis.naeb.gov.rw and are never stored by this app.</p>
+    <label>Username<input id="su" autocomplete="username" required></label>
+    <label>Password<input id="sp" type="password" autocomplete="current-password" required></label>
+    <p id="smsg" class="muted" role="alert"></p>
+    <div class="row"><button type="button" id="scancel" class="ghost">Cancel</button><button id="sgo">Sign in</button></div>
+  </form>
+</dialog>
+
+<div id="palette" class="palette" hidden>
+  <div class="palettebox">
+    <input id="pq" placeholder="Search entities, models, actions…" aria-label="Global search results">
+    <div id="pres" class="presults"></div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+<div id="report" class="report"></div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
