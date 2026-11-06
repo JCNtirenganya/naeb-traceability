@@ -158,6 +158,7 @@ tbody tr.indicative td{opacity:.85}
 
 /* palette */
 .palette{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1500;display:flex;justify-content:center;padding-top:12vh}
+.palette[hidden]{display:none}
 .palettebox{width:min(640px,92vw);background:var(--card);border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.4);overflow:hidden;height:fit-content;max-height:70vh;display:flex;flex-direction:column}
 .palettebox input{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:14px 16px;font-size:15px}
 .palettebox input:focus{outline:none}
